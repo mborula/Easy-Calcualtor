@@ -8,7 +8,12 @@ $("button").click(function(){
     buttonID = $(this).attr("id");  
     buttonClass = $(this).attr("class");  
     if(buttonClass === "number" && String(currentNumber).length < 40){
-        currentNumber += buttonID
+        if(String(currentNumber).length === 1 && Number(currentNumber) === 0 && buttonID !== "."){
+            currentNumber = buttonID;
+        }
+        else{
+            currentNumber += buttonID;
+        }
         screenText = currentNumber;
         lastNotNumber = false;
     }
@@ -19,7 +24,7 @@ $("button").click(function(){
         screenText = '';
         lastNotNumber = true;
     }
-    else if(buttonID === "*-1"){
+    else if(buttonID === "*-1" && lastNotNumber === false){
         var temp = Number(currentNumber);
         temp *= -1;
         currentNumber = String(temp);
